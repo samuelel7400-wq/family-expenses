@@ -310,43 +310,33 @@
 
         <div class="expense-card">
 
-            <div class="expense-top">
+    <div class="expense-top">
 
-                <div class="person">
-                    {{ expense.person }}
-                </div>
-
-                <div class="amount">
-                    ₹ {{ expense.amount }}
-                </div>
-
-            </div>
-
-            <div class="category">
-                {{ expense.category }}
-            </div>
-
-            <div class="note">
-                {{ expense.note }}
-            </div>
-
-            <div class="date">
-                {{ expense.date }}
-            </div>
-
-            <div class="actions">
-
-                
-
-                <a class="delete"
-                   href="/delete/{{ expense.id }}"
-                   onclick="return confirm('Delete this expense?')">
-                    Delete
-                </a>
-
-            </div>
-
+        <div class="category">
+            {{ expense.category }}
         </div>
+
+        <div class="amount">
+            ₹ {{ expense.amount }}
+        </div>
+
+    </div>
+
+    <div class="date">
+        {{ expense.date }}
+    </div>
+
+    <div class="actions">
+
+        <a class="delete"
+           href="/delete/{{ expense.id }}"
+           onclick="return confirm('Delete this expense?')">
+            Delete
+        </a>
+
+    </div>
+
+</div>
 
         {% endfor %}
 
