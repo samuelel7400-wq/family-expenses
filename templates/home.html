@@ -95,6 +95,7 @@
             font-size:22px;
             font-weight:600;
             margin-bottom:20px;
+            cursor:pointer;
         }
 
         select,input{
@@ -186,6 +187,14 @@
             margin:25px 0;
             border:none;
             border-top:1px solid #e2e8f0;
+        }
+
+        details summary{
+            list-style:none;
+        }
+
+        details summary::-webkit-details-marker{
+            display:none;
         }
 
     </style>
@@ -292,43 +301,49 @@
 
     <div class="card">
 
-        <div class="section-title">
-            Recent Expenses
-        </div>
+        <details>
 
-        {% for expense in expenses %}
+            <summary class="section-title">
+                Recent Expenses
+            </summary>
 
-        <div class="expense-card">
+            <br>
 
-            <div class="expense-top">
+            {% for expense in expenses %}
 
-                <div class="category">
-                    {{ expense.category }}
+            <div class="expense-card">
+
+                <div class="expense-top">
+
+                    <div class="category">
+                        {{ expense.category }}
+                    </div>
+
+                    <div class="amount">
+                        ₹ {{ expense.amount }}
+                    </div>
+
                 </div>
 
-                <div class="amount">
-                    ₹ {{ expense.amount }}
+                <div class="date">
+                    {{ expense.date }}
+                </div>
+
+                <div class="actions">
+
+                    <a class="delete"
+                       href="/delete/{{ expense.id }}"
+                       onclick="return confirm('Delete this expense?')">
+                        Delete
+                    </a>
+
                 </div>
 
             </div>
 
-            <div class="date">
-                {{ expense.date }}
-            </div>
+            {% endfor %}
 
-            <div class="actions">
-
-                <a class="delete"
-                   href="/delete/{{ expense.id }}"
-                   onclick="return confirm('Delete this expense?')">
-                    Delete
-                </a>
-
-            </div>
-
-        </div>
-
-        {% endfor %}
+        </details>
 
     </div>
 

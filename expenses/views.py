@@ -6,7 +6,7 @@ from django.db.models import Sum
 
 def home(request):
 
-    expenses = Expense.objects.all().order_by('-date')
+    expenses = Expense.objects.all().order_by('-id')[:10]
 
     total = Expense.objects.aggregate(total=Sum('amount'))['total'] or 0
 
