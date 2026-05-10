@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: family-expenses
-    env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn family_expenses.wsgi:application"
