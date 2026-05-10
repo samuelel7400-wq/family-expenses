@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Expense, Category
 from django.db.models import Sum
@@ -41,12 +42,18 @@ def home(request):
         )
 
         return redirect('/')
-
+    category_totals = Expense.objects.values(
+        'category__name'
+    ).annotate(
+        total=Sum('amount')
+    )
     context = {
         'expenses': expenses,
         'total': total,
+        
         'dad_total': dad_total,
         'mom_total': mom_total,
+        'category_totals': category_totals,
         'categories': categories
     }
 
@@ -62,29 +69,3 @@ def delete_expense(request, id):
     return redirect('/')
 
 
-def edit_expense(request, id):
-
-    expense = get_object_or_404(Expense, id=id)
-
-    categories = Category.objects.all()
-
-    if request.method == 'POST':
-
-        expense.person = request.POST['person']
-
-        category_id = request.POST['category']
-
-        expense.category = Category.objects.get(id=category_id)
-
-        expense.amount = request.POST['amount']
-
-        expense.note = request.POST['note']
-
-        expense.save()
-
-        return redirect('/')
-
-    return render(request, 'edit.html', {
-        'expense': expense,
-        'categories': categories
-    })
